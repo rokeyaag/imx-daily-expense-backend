@@ -1,0 +1,33 @@
+from django.contrib import admin
+from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
+from rest_framework.routers import DefaultRouter
+from rest_framework_simplejwt.views import TokenRefreshView
+
+from apps.users.views import RegisterView, LoginView, ProfileView, LogoutView
+from apps.expenses.views import ExpenseViewSet, CategoryViewSet, BudgetViewSet
+from apps.analytics.views import MonthlyTrendView, DailyBreakdownView
+
+router = DefaultRouter()
+router.register(r'expenses',   ExpenseViewSet,  basename='expense')
+router.register(r'categories', CategoryViewSet, basename='category')
+router.register(r'budgets',    BudgetViewSet,   basename='budget')
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+
+    # Auth
+    path('api/auth/register/',      RegisterView.as_view(),     name='register'),
+    path('api/auth/login/',         LoginView.as_view(),        name='login'),
+    path('api/auth/logout/',        LogoutView.as_view(),       name='logout'),
+    path('api/auth/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('api/auth/profile/',       ProfileView.as_view(),      name='profile'),
+
+    # Expenses, Categories, Budgets
+    path('api/', include(router.urls)),
+
+    # Analytics
+    path('api/analytics/monthly-trend/',   MonthlyTrendView.as_view(),   name='monthly-trend'),
+    path('api/analytics/daily-breakdown/', DailyBreakdownView.as_view(), name='daily-breakdown'),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
