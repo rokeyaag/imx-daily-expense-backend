@@ -113,3 +113,5 @@ USE_TZ = True
 
 # Anthropic API (Phase 2)
 ANTHROPIC_API_KEY = config('ANTHROPIC_API_KEY', default='')
+
+GROQ_API_KEY = config('GROQ_API_KEY', default='')
