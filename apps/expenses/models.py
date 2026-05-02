@@ -27,7 +27,7 @@ class Category(models.Model):
         related_name='categories'
     )
     name       = models.CharField(max_length=50)
-    icon       = models.CharField(max_length=20, choices=ICON_CHOICES, default='other')
+    icon       = models.CharField(max_length=50, default='other')
     color      = models.CharField(max_length=7, default='#6366F1')  # hex color
     is_default = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -97,3 +97,4 @@ class Budget(models.Model):
 
     def __str__(self):
         return f'{self.user} | {self.category} | {self.month}/{self.year}'
+
