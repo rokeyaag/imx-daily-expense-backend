@@ -1,0 +1,475 @@
+[
+{
+  "model": "users.user",
+  "fields": {
+    "password": "pbkdf2_sha256$600000$0M1mQIqt0jAVymBzZXGeVV$HkcPHALu9/VsKnJ06WErVTpMwA5sKEY70xK1TJp3u/c=",
+    "last_login": null,
+    "is_superuser": false,
+    "email": "lutfor@gmail.com",
+    "name": "Lutfor",
+    "currency": "BDT",
+    "avatar": "image/upload/https://res.cloudinary.com/dr7c7wxaw/image/upload/v1778117680/avatars/hwmqnusuf8auaexrelii.jpg",
+    "is_active": true,
+    "is_staff": false,
+    "created_at": "2026-05-05T09:51:18.640Z",
+    "updated_at": "2026-05-07T01:34:46.936Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$4gQUpd5tH7CzGXxx8UHHdq$rrFZvRyAKErnnDnu/a/yidlkFw0tc9+zzOWhm8mWOyI=",
+    "last_login": null,
+    "is_superuser": false,
+    "email": "shajid@gmail.com",
+    "name": "Shajid",
+    "currency": "BDT",
+    "avatar": "image/upload/https://res.cloudinary.com/dr7c7wxaw/image/upload/v1778005409/avatars/aeeq7zcflewhw8lxsppb.jpg",
+    "is_active": true,
+    "is_staff": false,
+    "created_at": "2026-05-05T09:56:29.857Z",
+    "updated_at": "2026-05-05T18:23:34.716Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "expenses.category",
+  "pk": "237e8662-4856-49ba-9941-16bcb3877282",
+  "fields": {
+    "user": [
+      "lutfor@gmail.com"
+    ],
+    "name": "Transport",
+    "icon": "TR",
+    "color": "#06B6D4",
+    "is_default": false,
+    "created_at": "2026-05-05T10:07:45.244Z"
+  }
+},
+{
+  "model": "expenses.category",
+  "pk": "53c5487d-fe6a-426c-b862-b879abfefe16",
+  "fields": {
+    "user": [
+      "lutfor@gmail.com"
+    ],
+    "name": "Education",
+    "icon": "ED",
+    "color": "#F97316",
+    "is_default": false,
+    "created_at": "2026-05-05T10:07:47.652Z"
+  }
+},
+{
+  "model": "expenses.category",
+  "pk": "60d821dd-5b89-48ee-8de3-02b8f45e97d7",
+  "fields": {
+    "user": [
+      "shajid@gmail.com"
+    ],
+    "name": "Sale",
+    "icon": "FD",
+    "color": "#EC4899",
+    "is_default": false,
+    "created_at": "2026-05-05T10:13:04.125Z"
+  }
+},
+{
+  "model": "expenses.category",
+  "pk": "7115bbdf-5937-4f4b-bfa2-55de184b77c6",
+  "fields": {
+    "user": [
+      "lutfor@gmail.com"
+    ],
+    "name": "Bills",
+    "icon": "BL",
+    "color": "#8B5CF6",
+    "is_default": false,
+    "created_at": "2026-05-05T10:07:46.447Z"
+  }
+},
+{
+  "model": "expenses.category",
+  "pk": "71e3370e-b1a5-48cf-ac53-15aac18db017",
+  "fields": {
+    "user": [
+      "lutfor@gmail.com"
+    ],
+    "name": "Travel",
+    "icon": "TV",
+    "color": "#14B8A6",
+    "is_default": false,
+    "created_at": "2026-05-05T10:07:48.450Z"
+  }
+},
+{
+  "model": "expenses.category",
+  "pk": "8a6e63da-ccb6-4988-9f94-bb3bb6cf9776",
+  "fields": {
+    "user": [
+      "lutfor@gmail.com"
+    ],
+    "name": "Food",
+    "icon": "FD",
+    "color": "#F59E0B",
+    "is_default": false,
+    "created_at": "2026-05-05T10:07:44.816Z"
+  }
+},
+{
+  "model": "expenses.category",
+  "pk": "9b533b93-b3b2-47f5-ae51-dfbe391326e1",
+  "fields": {
+    "user": [
+      "lutfor@gmail.com"
+    ],
+    "name": "Games",
+    "icon": "GM",
+    "color": "#84CC16",
+    "is_default": false,
+    "created_at": "2026-05-05T10:07:48.050Z"
+  }
+},
+{
+  "model": "expenses.category",
+  "pk": "9ed8ad45-e137-4aff-b40f-9ad0f53ae254",
+  "fields": {
+    "user": [
+      "shajid@gmail.com"
+    ],
+    "name": "Bazar",
+    "icon": "FD",
+    "color": "#F97316",
+    "is_default": false,
+    "created_at": "2026-05-05T10:13:27.088Z"
+  }
+},
+{
+  "model": "expenses.category",
+  "pk": "cc82e8cd-f7bf-409d-8280-5a0622078ab9",
+  "fields": {
+    "user": [
+      "lutfor@gmail.com"
+    ],
+    "name": "Health",
+    "icon": "HL",
+    "color": "#EF4444",
+    "is_default": false,
+    "created_at": "2026-05-05T10:07:46.050Z"
+  }
+},
+{
+  "model": "expenses.category",
+  "pk": "e41d4037-a925-4c5d-9503-34956d8ea813",
+  "fields": {
+    "user": [
+      "lutfor@gmail.com"
+    ],
+    "name": "Shopping",
+    "icon": "SH",
+    "color": "#EC4899",
+    "is_default": false,
+    "created_at": "2026-05-05T10:07:45.645Z"
+  }
+},
+{
+  "model": "expenses.category",
+  "pk": "f0a1eff3-b276-443d-b114-1c1a22979ab5",
+  "fields": {
+    "user": [
+      "lutfor@gmail.com"
+    ],
+    "name": "Rent",
+    "icon": "RN",
+    "color": "#6366F1",
+    "is_default": false,
+    "created_at": "2026-05-05T10:07:46.843Z"
+  }
+},
+{
+  "model": "expenses.category",
+  "pk": "f329b8d5-33c3-41b7-95c4-35dc0711582b",
+  "fields": {
+    "user": [
+      "lutfor@gmail.com"
+    ],
+    "name": "Salary",
+    "icon": "SL",
+    "color": "#10B981",
+    "is_default": false,
+    "created_at": "2026-05-05T10:07:47.247Z"
+  }
+},
+{
+  "model": "expenses.expense",
+  "pk": "19394a7d-6768-4eaa-9b0b-eca41bb1bc2e",
+  "fields": {
+    "user": [
+      "lutfor@gmail.com"
+    ],
+    "category": "e41d4037-a925-4c5d-9503-34956d8ea813",
+    "type": "expense",
+    "amount": "990.00",
+    "note": "market expense",
+    "date": "2026-05-07",
+    "created_at": "2026-05-07T05:12:41.789Z"
+  }
+},
+{
+  "model": "expenses.expense",
+  "pk": "1caff14a-df0e-4d4d-9197-2a6385f37e89",
+  "fields": {
+    "user": [
+      "shajid@gmail.com"
+    ],
+    "category": null,
+    "type": "income",
+    "amount": "4500.00",
+    "note": "Sales",
+    "date": "2026-05-05",
+    "created_at": "2026-05-05T18:24:25.877Z"
+  }
+},
+{
+  "model": "expenses.expense",
+  "pk": "1d9b4cba-b2d6-4e07-a5c5-8579c4787d85",
+  "fields": {
+    "user": [
+      "shajid@gmail.com"
+    ],
+    "category": "9ed8ad45-e137-4aff-b40f-9ad0f53ae254",
+    "type": "expense",
+    "amount": "350.00",
+    "note": "Potato",
+    "date": "2026-05-05",
+    "created_at": "2026-05-05T10:21:04.853Z"
+  }
+},
+{
+  "model": "expenses.expense",
+  "pk": "3331be09-84b3-496a-bba2-e30da5ec1280",
+  "fields": {
+    "user": [
+      "lutfor@gmail.com"
+    ],
+    "category": null,
+    "type": "expense",
+    "amount": "150.00",
+    "note": "Mobile",
+    "date": "2026-05-07",
+    "created_at": "2026-05-07T03:52:25.854Z"
+  }
+},
+{
+  "model": "expenses.expense",
+  "pk": "42461df5-478c-4974-b7cd-87ed5502f32e",
+  "fields": {
+    "user": [
+      "shajid@gmail.com"
+    ],
+    "category": "9ed8ad45-e137-4aff-b40f-9ad0f53ae254",
+    "type": "expense",
+    "amount": "350.00",
+    "note": "Suger",
+    "date": "2026-05-05",
+    "created_at": "2026-05-05T10:20:31.392Z"
+  }
+},
+{
+  "model": "expenses.expense",
+  "pk": "431f052f-ac4b-4a30-b9d1-95cc391022e1",
+  "fields": {
+    "user": [
+      "shajid@gmail.com"
+    ],
+    "category": "9ed8ad45-e137-4aff-b40f-9ad0f53ae254",
+    "type": "expense",
+    "amount": "500.00",
+    "note": "Meet",
+    "date": "2026-05-05",
+    "created_at": "2026-05-05T10:13:57.956Z"
+  }
+},
+{
+  "model": "expenses.expense",
+  "pk": "599490a7-129b-417e-9e6b-a4c8d65b92e1",
+  "fields": {
+    "user": [
+      "shajid@gmail.com"
+    ],
+    "category": "9ed8ad45-e137-4aff-b40f-9ad0f53ae254",
+    "type": "expense",
+    "amount": "300.00",
+    "note": "Fish",
+    "date": "2026-05-05",
+    "created_at": "2026-05-05T18:24:03.839Z"
+  }
+},
+{
+  "model": "expenses.expense",
+  "pk": "5f6a0c6f-b66d-4812-ab5e-1baf446f7266",
+  "fields": {
+    "user": [
+      "shajid@gmail.com"
+    ],
+    "category": "9ed8ad45-e137-4aff-b40f-9ad0f53ae254",
+    "type": "expense",
+    "amount": "450.00",
+    "note": "Milk",
+    "date": "2026-05-05",
+    "created_at": "2026-05-05T10:14:30.336Z"
+  }
+},
+{
+  "model": "expenses.expense",
+  "pk": "705cbfb6-9ad5-4add-94fc-4814b8b13d14",
+  "fields": {
+    "user": [
+      "shajid@gmail.com"
+    ],
+    "category": null,
+    "type": "expense",
+    "amount": "1250.00",
+    "note": "Shirt",
+    "date": "2026-05-05",
+    "created_at": "2026-05-05T10:11:52.031Z"
+  }
+},
+{
+  "model": "expenses.expense",
+  "pk": "9229f0db-6e9d-45c1-8624-29c3b2a7d513",
+  "fields": {
+    "user": [
+      "lutfor@gmail.com"
+    ],
+    "category": "7115bbdf-5937-4f4b-bfa2-55de184b77c6",
+    "type": "expense",
+    "amount": "0.00",
+    "note": "query about monthly expenses",
+    "date": "2026-05-07",
+    "created_at": "2026-05-07T04:39:40.187Z"
+  }
+},
+{
+  "model": "expenses.expense",
+  "pk": "9bff9c5c-7a64-40e9-84bc-11b7a0074ae7",
+  "fields": {
+    "user": [
+      "shajid@gmail.com"
+    ],
+    "category": "9ed8ad45-e137-4aff-b40f-9ad0f53ae254",
+    "type": "expense",
+    "amount": "250.00",
+    "note": "Coil",
+    "date": "2026-05-05",
+    "created_at": "2026-05-05T10:29:05.265Z"
+  }
+},
+{
+  "model": "expenses.expense",
+  "pk": "a08ddbfb-9ecb-427b-a936-a0ce627eff58",
+  "fields": {
+    "user": [
+      "shajid@gmail.com"
+    ],
+    "category": null,
+    "type": "expense",
+    "amount": "11250.00",
+    "note": "Dress Purchased",
+    "date": "2026-05-05",
+    "created_at": "2026-05-05T10:10:43.927Z"
+  }
+},
+{
+  "model": "expenses.expense",
+  "pk": "b1cd1460-0a95-487e-9084-de675a39f362",
+  "fields": {
+    "user": [
+      "lutfor@gmail.com"
+    ],
+    "category": "53c5487d-fe6a-426c-b862-b879abfefe16",
+    "type": "expense",
+    "amount": "500.00",
+    "note": "Book",
+    "date": "2026-05-04",
+    "created_at": "2026-05-07T03:52:56.416Z"
+  }
+},
+{
+  "model": "expenses.expense",
+  "pk": "dbb531f4-4630-4dbf-9366-d9cfa8514fb6",
+  "fields": {
+    "user": [
+      "lutfor@gmail.com"
+    ],
+    "category": "8a6e63da-ccb6-4988-9f94-bb3bb6cf9776",
+    "type": "income",
+    "amount": "5000.00",
+    "note": "Mango Sale",
+    "date": "2026-05-07",
+    "created_at": "2026-05-07T17:09:39.294Z"
+  }
+},
+{
+  "model": "expenses.expense",
+  "pk": "e4ae5705-1c16-4415-874c-01ccaa6d4746",
+  "fields": {
+    "user": [
+      "lutfor@gmail.com"
+    ],
+    "category": null,
+    "type": "expense",
+    "amount": "25800.00",
+    "note": "Washing machine",
+    "date": "2026-05-07",
+    "created_at": "2026-05-07T16:05:58.014Z"
+  }
+},
+{
+  "model": "expenses.expense",
+  "pk": "e8ab58ca-9ad3-4bb9-8f52-ecaedac6ee9d",
+  "fields": {
+    "user": [
+      "shajid@gmail.com"
+    ],
+    "category": null,
+    "type": "income",
+    "amount": "50000.00",
+    "note": "House rent",
+    "date": "2026-05-04",
+    "created_at": "2026-05-05T10:04:53.248Z"
+  }
+},
+{
+  "model": "expenses.expense",
+  "pk": "f80da363-7925-4f06-b635-8fbfc0f6f79d",
+  "fields": {
+    "user": [
+      "lutfor@gmail.com"
+    ],
+    "category": "f0a1eff3-b276-443d-b114-1c1a22979ab5",
+    "type": "income",
+    "amount": "25000.00",
+    "note": "Rent",
+    "date": "2026-05-01",
+    "created_at": "2026-05-07T03:51:52.168Z"
+  }
+},
+{
+  "model": "expenses.budget",
+  "pk": "d483331d-0b9b-49b4-b1a2-80776cc244c4",
+  "fields": {
+    "user": [
+      "shajid@gmail.com"
+    ],
+    "category": "9ed8ad45-e137-4aff-b40f-9ad0f53ae254",
+    "amount": "5000.00",
+    "month": 5,
+    "year": 2026,
+    "created_at": "2026-05-05T10:30:39.681Z"
+  }
+}
+]
