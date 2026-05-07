@@ -7,7 +7,7 @@ from rest_framework_simplejwt.views import TokenRefreshView
 from apps.users.views import RegisterView, LoginView, ProfileView, LogoutView
 from apps.expenses.views import ExpenseViewSet, CategoryViewSet, BudgetViewSet
 from apps.analytics.views import MonthlyTrendView, DailyBreakdownView
-from apps.ai_engine.views import AIExpenseView
+from apps.ai_engine.views import AIExpenseView, ReceiptScanView, BudgetPredictionView
 
 router = DefaultRouter()
 router.register(r"expenses",   ExpenseViewSet,  basename="expense")
@@ -25,4 +25,9 @@ urlpatterns = [
     path("api/analytics/monthly-trend/",   MonthlyTrendView.as_view(),   name="monthly-trend"),
     path("api/analytics/daily-breakdown/", DailyBreakdownView.as_view(), name="daily-breakdown"),
     path("api/ai/add-expense/",            AIExpenseView.as_view(),       name="ai-add-expense"),
+    path("api/ai/scan-receipt/",           ReceiptScanView.as_view(),     name="ai-scan-receipt"),
+    path("api/ai/budget-prediction/",      BudgetPredictionView.as_view(), name="ai-budget-prediction"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+

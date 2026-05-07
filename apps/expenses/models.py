@@ -2,99 +2,51 @@ import uuid
 from django.db import models
 from django.conf import settings
 
-
 class Category(models.Model):
-    ICON_CHOICES = [
-        ('food',        '🍽️ Food & Dining'),
-        ('transport',   '🚗 Transport'),
-        ('shopping',    '🛍️ Shopping'),
-        ('health',      '💊 Health'),
-        ('education',   '📚 Education'),
-        ('bills',       '💡 Bills & Utilities'),
-        ('rent',        '🏠 Rent'),
-        ('salary',      '💰 Salary'),
-        ('freelance',   '💻 Freelance'),
-        ('bkash',       '📱 bKash / Nagad'),
-        ('entertainment','🎬 Entertainment'),
-        ('other',       '📦 Other'),
-    ]
-
     id         = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    user       = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE,
-        null=True, blank=True,  # null = default/system category
-        related_name='categories'
-    )
-    name       = models.CharField(max_length=50)
-    icon       = models.CharField(max_length=50, default='other')
-    color      = models.CharField(max_length=7, default='#6366F1')  # hex color
+    user       = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="categories", null=True, blank=True)
+    name       = models.CharField(max_length=100)
+    icon       = models.CharField(max_length=10, blank=True, default="")
+    color      = models.CharField(max_length=20, blank=True, default="#6366F1")
     is_default = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        db_table  = 'categories'
-        ordering  = ['name']
-        verbose_name_plural = 'Categories'
+        ordering = ["name"]
+        verbose_name_plural = "categories"
 
     def __str__(self):
         return self.name
 
-
 class Expense(models.Model):
-    TYPE_CHOICES = [
-        ('expense', 'Expense'),
-        ('income',  'Income'),
-    ]
-
+    TYPE_CHOICES = [("income", "Income"), ("expense", "Expense")]
     id         = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    user       = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE,
-        related_name='expenses'
-    )
-    type       = models.CharField(max_length=10, choices=TYPE_CHOICES, default='expense')
+    user       = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="expenses")
+    category   = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True, related_name="expenses")
+    type       = models.CharField(max_length=10, choices=TYPE_CHOICES, default="expense")
     amount     = models.DecimalField(max_digits=12, decimal_places=2)
-    category   = models.ForeignKey(
-        Category,
-        on_delete=models.SET_NULL,
-        null=True, blank=True,
-        related_name='expenses'
-    )
-    note       = models.TextField(blank=True, default='')
+    note       = models.CharField(max_length=255, blank=True, default="")
     date       = models.DateField()
     created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-        db_table = 'expenses'
-        ordering = ['-date', '-created_at']
+        ordering = ["-date", "-created_at"]
 
     def __str__(self):
-        return f'{self.type} | {self.amount} BDT | {self.date}'
-
+        return f"{self.type} - {self.amount}"
 
 class Budget(models.Model):
     id         = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    user       = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE,
-        related_name='budgets'
-    )
-    category   = models.ForeignKey(
-        Category,
-        on_delete=models.CASCADE,
-        related_name='budgets'
-    )
+    user       = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="budgets")
+    category   = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True, related_name="budgets")
     amount     = models.DecimalField(max_digits=12, decimal_places=2)
-    month      = models.IntegerField()   # 1–12
+    month      = models.IntegerField()
     year       = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        db_table = 'budgets'
-        unique_together = ['user', 'category', 'month', 'year']
+        ordering = ["-year", "-month"]
 
     def __str__(self):
-        return f'{self.user} | {self.category} | {self.month}/{self.year}'
+        return f"Budget {self.month}/{self.year} - {self.amount}"
 

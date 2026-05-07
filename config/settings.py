@@ -21,6 +21,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'corsheaders',
+    'cloudinary',
     'django_filters',
 
     # Our apps
@@ -115,3 +116,12 @@ USE_TZ = True
 ANTHROPIC_API_KEY = config('ANTHROPIC_API_KEY', default='')
 
 GROQ_API_KEY = config('GROQ_API_KEY', default='')
+
+import cloudinary
+cloudinary.config(
+    cloud_name = "dr7c7wxaw",
+    api_key    = "227418497739679",
+    api_secret = "iE9dl_PdGgCe55KiFO2il-rD9jc",
+    secure     = True
+)
+
