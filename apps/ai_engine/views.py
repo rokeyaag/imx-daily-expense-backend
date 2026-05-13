@@ -132,11 +132,16 @@ Return ONLY this JSON format:
             user = request.user
             today = date.today()
             month_start = today.replace(day=1)
+            import calendar
+            days_in_month = calendar.monthrange(today.year, today.month)[1]
+            days_passed = today.day
 
             expenses = Expense.objects.filter(user=user, date__gte=month_start)
             total_income = expenses.filter(type="income").aggregate(Sum("amount"))["amount__sum"] or 0
             total_expense = expenses.filter(type="expense").aggregate(Sum("amount"))["amount__sum"] or 0
             balance = total_income - total_expense
+            daily_avg = float(total_expense) / days_passed if days_passed > 0 else 0
+            predicted = daily_avg * days_in_month
 
             category_breakdown = []
             for cat in Category.objects.filter(user=user):
@@ -144,29 +149,58 @@ Return ONLY this JSON format:
                 if cat_total > 0:
                     category_breakdown.append(f"{cat.name}: Tk {cat_total}")
 
-            recent = expenses.order_by("-date")[:5]
-            recent_list = [f"{e.note} - Tk {e.amount} ({e.type})" for e in recent]
+            last_month_start = (month_start - __import__("datetime").timedelta(days=1)).replace(day=1)
+            last_month_expense = Expense.objects.filter(user=user, date__gte=last_month_start, date__lt=month_start, type="expense").aggregate(Sum("amount"))["amount__sum"] or 0
+
+            recent = Expense.objects.filter(user=user).order_by("-date")[:10]
+            recent_list = [f"{e.note} - Tk {e.amount} ({e.type}, {e.date})" for e in recent]
+
+            all_expenses = Expense.objects.filter(user=user, type="expense")
+            all_time_total = all_expenses.aggregate(Sum("amount"))["amount__sum"] or 0
 
             context = f"""
-User Financial Summary for {today.strftime("%B %Y")}:
+You are a smart, friendly personal finance assistant for IMX Daily Expense app.
+User: {user.name} | Currency: {user.currency}
+Today: {today.strftime("%d %B %Y")} | Day {days_passed}/{days_in_month}
+
+=== THIS MONTH ({today.strftime("%B %Y")}) ===
 - Total Income: Tk {total_income}
 - Total Expense: Tk {total_expense}
 - Current Balance: Tk {balance}
-- Category Breakdown: {", ".join(category_breakdown) if category_breakdown else "No expenses yet"}
-- Recent Transactions: {", ".join(recent_list) if recent_list else "No transactions yet"}
+- Daily Average Expense: Tk {daily_avg:.0f}
+- Predicted Month Total: Tk {predicted:.0f}
+- Last Month Expense: Tk {last_month_expense}
+
+=== CATEGORY BREAKDOWN ===
+{chr(10).join(category_breakdown) if category_breakdown else "No expenses yet"}
+
+=== RECENT TRANSACTIONS (last 10) ===
+{chr(10).join(recent_list) if recent_list else "No transactions yet"}
+
+=== ALL TIME ===
+- Total Expenses Ever: Tk {all_time_total}
+
+INSTRUCTIONS:
+- Be friendly, helpful and conversational
+- Respond in the same language the user writes (Bengali or English)
+- Give specific, data-driven advice based on their actual numbers
+- Point out spending patterns, savings opportunities
+- Be encouraging and positive
+- Keep responses concise but informative
+- Use emojis occasionally to make it friendly
 """
+
+            history = request.data.get("history", [])
+            messages = [{"role": "system", "content": context}]
+            for h in history[-10:]:
+                messages.append({"role": h.get("role", "user"), "content": h.get("content", "")})
+            messages.append({"role": "user", "content": text})
 
             client = Groq(api_key=settings.GROQ_API_KEY)
             completion = client.chat.completions.create(
                 model="llama-3.3-70b-versatile",
-                messages=[
-                    {"role": "system", "content": f"""You are a helpful personal finance assistant for IMX Daily Expense app.
-You have access to the user financial data. Answer questions about their finances, give advice, and help them understand their spending.
-Keep responses concise, friendly, and in the same language the user writes in (Bengali or English).
-{context}"""},
-                    {"role": "user", "content": text}
-                ],
-                max_tokens=500,
+                messages=messages,
+                max_tokens=600,
             )
 
             reply = completion.choices[0].message.content
@@ -187,7 +221,7 @@ class ReceiptScanView(APIView):
         try:
             client = Groq(api_key=settings.GROQ_API_KEY)
             completion = client.chat.completions.create(
-                model="llama-4-scout-17b-16e-instruct",
+                model="meta-llama/llama-4-scout-17b-16e-instruct",
                 messages=[
                     {
                         "role": "user",
@@ -325,4 +359,5 @@ Give a brief financial analysis and 2-3 saving tips. Be friendly and specific.
 
         except Exception as e:
             return Response({"error": str(e)}, status=400)
+
 
