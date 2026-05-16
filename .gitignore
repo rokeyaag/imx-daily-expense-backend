@@ -1,6 +1,15 @@
-__pycache__/
+﻿__pycache__/
 *.pyc
 .env
 *.sqlite3
 staticfiles/
 media/
+venv/
+.venv/
+*.backup
+*.backup-*
+backup.json
+*.zip
+.idea/
+.vscode/
+.railway/

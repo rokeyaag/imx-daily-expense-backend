@@ -72,6 +72,13 @@ class ExpenseViewSet(viewsets.ModelViewSet):
         return Response(list(data))
 
 
+    @action(detail=False, methods=["delete"])
+    def clear_all(self, request):
+        Expense.objects.filter(user=request.user).delete()
+        Category.objects.filter(user=request.user).delete()
+        Budget.objects.filter(user=request.user).delete()
+        return Response({"message": "All data cleared"})
+
 class CategoryViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
     serializer_class   = CategorySerializer
@@ -92,3 +99,5 @@ class BudgetViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         return Budget.objects.filter(user=self.request.user).select_related('category')
+
+
